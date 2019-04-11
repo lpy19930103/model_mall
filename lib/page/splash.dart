@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:model_mall/page_constance.dart';
-import 'package:model_mall/skip_down_time.dart';
+import 'package:model_mall/view/skip_down_time.dart';
 
 
 class WelcomePage extends StatefulWidget {

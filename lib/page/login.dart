@@ -1,5 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:model_mall/page_constance.dart';
+import 'package:model_mall/common/app_constance.dart';
+import 'package:model_mall/common/toast.dart';
+import 'package:model_mall/common/http.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -40,27 +44,28 @@ class _LoginState extends State<LoginWidget> {
     );
   }
 
+  void login() async {
+    FormData formData = new FormData.from(
+        {"userName": phoneController.text, "userPass": passController.text});
+    Response response = await dio
+        .post(AppConstance.APP_HOST_URL + "/user/login", data: formData);
+    print(response);
+    var data = response.data;
+    if (data['code'] == 0) {
+      _goHome();
+    } else {
+      Toast.toast(context, data['msg']);
+    }
+  }
+
   void _login() {
     if (phoneController.text.length != 11) {
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: Text('手机号码格式不对'),
-              ));
+      Toast.toast(context, "请输入正确的手机号");
     } else if (passController.text.length == 0) {
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: Text('请填写密码'),
-              ));
+      Toast.toast(context, "请填写密码");
     } else {
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: Text('登录成功'),
-              ));
+      login();
     }
-    _goHome();
   }
 
   void _goHome() {
