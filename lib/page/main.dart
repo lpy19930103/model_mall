@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:model_mall/page/splash.dart';
 import 'package:model_mall/page_constance.dart';
 import 'package:model_mall/common/http.dart';
+import 'package:model_mall/common/app_constance.dart';
 
 // Must be top-level function
 _parseAndDecode(String response) {
@@ -22,9 +23,10 @@ void main() {
   dio.interceptors..add(CookieManager(CookieJar()))..add(LogInterceptor());
   (dio.transformer as DefaultTransformer).jsonDecodeCallback = parseJson;
   dio.options.receiveTimeout = 15000;
-
+  dio.options.connectTimeout = 15000;
+  dio.options.baseUrl = AppConstance.APP_HOST_URL;
   runApp(MyApp());
-};
+}
 
 class MyApp extends StatelessWidget {
   @override

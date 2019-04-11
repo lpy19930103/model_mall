@@ -21,29 +21,7 @@ class _WelcomePageState extends State<WelcomePage>
   @override
   void initState() {
     super.initState();
-    _getWelcomeImage();
     _delayedGoHomePage();
-  }
-
-  _getWelcomeImage() async {
-    /*  String url = AppConstance.makeUrl('services/app_ad_cover.json', null);
-    var response = await http.get(url);
-    print(response.body);
-    List list = json.decode(response.body);
-    String cover = '';
-    var item;
-    for (item in list) {
-      cover = item['field_app_ad_cover'];
-      if (cover != null && cover.isNotEmpty) {
-        cover = StringUtil.getSrcImagePath(cover);
-        break;
-      }
-    }
-
-    print('cover===$cover');
-    setState(() {
-      welcomeImageUrl = cover;
-    });*/
   }
 
   _delayedGoHomePage() {

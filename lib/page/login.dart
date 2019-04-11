@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:model_mall/page_constance.dart';
-import 'package:model_mall/common/app_constance.dart';
 import 'package:model_mall/common/toast.dart';
 import 'package:model_mall/common/http.dart';
 
@@ -47,8 +46,7 @@ class _LoginState extends State<LoginWidget> {
   void login() async {
     FormData formData = new FormData.from(
         {"userName": phoneController.text, "userPass": passController.text});
-    Response response = await dio
-        .post(AppConstance.APP_HOST_URL + "/user/login", data: formData);
+    Response response = await dio.post("/user/login", data: formData);
     print(response);
     var data = response.data;
     if (data['code'] == 0) {
