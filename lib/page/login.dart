@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:model_mall/page_constance.dart';
 
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Welcome to Flutter',
-      home: new Scaffold(
+    return new Scaffold(
 //        appBar: new AppBar(
 //          title: new Text('Welcome to Flutter'),
 //        ),
-          body: LoginWidget()),
-    );
+        body: LoginWidget());
   }
 }
 
 class LoginWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return LoginState();
+    return _LoginState();
   }
 }
 
-class LoginState extends State {
+class _LoginState extends State<LoginWidget> {
   //手机号的控制器
   TextEditingController phoneController = TextEditingController();
 
@@ -43,7 +41,6 @@ class LoginState extends State {
   }
 
   void _login() {
-    print({'phone': phoneController.text, 'password': passController.text});
     if (phoneController.text.length != 11) {
       showDialog(
           context: context,
@@ -62,9 +59,15 @@ class LoginState extends State {
           builder: (context) => AlertDialog(
                 title: Text('登录成功'),
               ));
-//      phoneController.clear();
-//      passController.clear();
     }
+    _goHome();
+  }
+
+  void _goHome() {
+    phoneController.clear();
+    passController.clear();
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        PageConstance.HOME_PAGE, (Route<dynamic> route) => false);
   }
 }
 
@@ -72,10 +75,6 @@ class CustomTextField extends StatelessWidget {
   TextEditingController phoneController;
 
   CustomTextField(this.phoneController) {}
-
-  void _textFieldChanged(String str) {
-    print(str);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +89,6 @@ class CustomTextField extends StatelessWidget {
           labelText: '请输入账号',
 //            helperText: "请输入手机号"
         ),
-        onChanged: _textFieldChanged,
         autofocus: false,
       ),
     );
@@ -101,10 +99,6 @@ class PwdTextField extends StatelessWidget {
   TextEditingController passController;
 
   PwdTextField(this.passController) {}
-
-  void _textFieldChanged(String str) {
-    print(str);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +114,6 @@ class PwdTextField extends StatelessWidget {
           labelText: '请输入密码',
 //            helperText: "请输入手机号"
         ),
-        onChanged: _textFieldChanged,
         autofocus: false,
       ),
     );
