@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:cookie_jar/cookie_jar.dart';
@@ -18,6 +19,14 @@ parseJson(String text) {
   return compute(_parseAndDecode, text);
 }
 
+void collectLog(String line) {
+  //收集日志
+}
+
+void reportErrorAndLog(Object obj, StackTrace stack) {
+  print("Error : " + obj.toString());
+}
+
 void main() {
 // add interceptors
   dio.interceptors..add(CookieManager(CookieJar()))..add(LogInterceptor());
@@ -25,7 +34,18 @@ void main() {
   dio.options.receiveTimeout = 15000;
   dio.options.connectTimeout = 15000;
   dio.options.baseUrl = AppConstance.APP_HOST_URL;
-  runApp(MyApp());
+
+  runZoned(
+    () => runApp(MyApp()),
+    zoneSpecification: ZoneSpecification(
+      print: (Zone self, ZoneDelegate parent, Zone zone, String line) {
+        parent.print(zone, "print: $line");
+      },
+    ),
+    onError: (Object obj, StackTrace stack) {
+      reportErrorAndLog(obj, stack);
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {
