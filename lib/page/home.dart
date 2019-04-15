@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage>
     super.initState();
     _tabController = TabController(length: tabs.length, vsync: this);
     _tabController.addListener(() {
-      print(_tabController.index);
+      print("tab index : ${_tabController.index}");
     });
   }
 
@@ -25,6 +25,8 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("首页"),
+        centerTitle: true,
         bottom: TabBar(
             //生成Tab菜单
             controller: _tabController,

@@ -3,31 +3,17 @@ import 'home.dart';
 import 'order.dart';
 import 'mine.dart';
 
-class MainScreenPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-        title: 'Welcome to Flutter',
-        home: new Scaffold(
-//        appBar: new AppBar(
-//          title: new Text('Welcome to Flutter'),
-//        ),
-            body: MainScreenWidget()));
-  }
-}
-
-class MainScreenWidget extends StatefulWidget {
+class MainScreenPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return _MainScreenState();
   }
 }
 
-class _MainScreenState extends State<MainScreenWidget>
+class _MainScreenState extends State<MainScreenPage>
     with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
   List _bodys = [HomePage(), OrderPage(), MinePage()];
-
 
   @override
   Widget build(BuildContext context) {
