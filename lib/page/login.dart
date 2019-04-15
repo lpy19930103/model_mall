@@ -70,7 +70,7 @@ class _LoginState extends State<LoginWidget> {
     phoneController.clear();
     passController.clear();
     Navigator.of(context).pushNamedAndRemoveUntil(
-        PageConstance.HOME_PAGE, (Route<dynamic> route) => false);
+        PageConstance.MAIN_SCREEN_PAGE, (Route<dynamic> route) => false);
   }
 }
 

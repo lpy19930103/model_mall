@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:model_mall/page_constance.dart';
 import 'package:model_mall/view/skip_down_time.dart';
 
-
 class WelcomePage extends StatefulWidget {
   WelcomePage({Key key}) : super(key: key);
 
@@ -66,7 +65,7 @@ class _WelcomePageState extends State<WelcomePage>
 //跳转方法
   _goHomePage() {
     Navigator.of(context).pushNamedAndRemoveUntil(
-        PageConstance.LOGIN_PAGE, (Route<dynamic> route) => false);
+        PageConstance.MAIN_SCREEN_PAGE, (Route<dynamic> route) => false);
   }
 
   @override

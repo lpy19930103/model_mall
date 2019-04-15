@@ -1,29 +1,16 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-        title: 'Welcome to Flutter',
-        home: new Scaffold(
-//        appBar: new AppBar(
-//          title: new Text('Welcome to Flutter'),
-//        ),
-            body: HomeWidget()));
-  }
-}
-
-class HomeWidget extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _HomeState();
+    return _HomePageState();
   }
 }
 
-class _HomeState extends State<HomeWidget> with SingleTickerProviderStateMixin {
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
   List tabs = ["a", "b", "c"];
-  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -53,23 +40,6 @@ class _HomeState extends State<HomeWidget> with SingleTickerProviderStateMixin {
           );
         }).toList(),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("首页")),
-          BottomNavigationBarItem(icon: Icon(Icons.reorder), title: Text('订单')),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.perm_identity), title: Text('我')),
-        ],
-        currentIndex: _selectedIndex,
-        fixedColor: Colors.red,
-        onTap: _onItemTapped,
-      ),
     );
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 }
