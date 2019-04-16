@@ -24,7 +24,7 @@ class _WelcomePageState extends State<WelcomePage>
   }
 
   _delayedGoHomePage() {
-    Future.delayed(new Duration(seconds: 5), () {
+    Future.delayed(new Duration(seconds: 3), () {
       _goHomePage();
     });
   }
@@ -50,7 +50,7 @@ class _WelcomePageState extends State<WelcomePage>
               child: new SkipDownTimeProgress(
                 Colors.red,
                 22,
-                new Duration(seconds: 5),
+                new Duration(seconds: 3),
                 new Size(25, 25),
                 skipText: "跳过",
                 clickListener: this,

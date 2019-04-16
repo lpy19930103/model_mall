@@ -38,7 +38,7 @@ class _HomeState extends State<HomePage> {
       body: Column(
         children: <Widget>[
           BannerWidget(
-            180,
+            200,
             bannerList,
             bannerPress: (pos, item) {
               print('第 $pos 点击了');

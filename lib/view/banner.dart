@@ -33,7 +33,7 @@ class BannerWidget extends StatefulWidget {
       double this.pointRadius = 3.0,
       Color this.selectedColor = Colors.red,
       Color this.unSelectedColor = Colors.white,
-      Color this.textBackgroundColor = const Color(0x99000000),
+      Color this.textBackgroundColor = const Color(0x00000000),
       bool this.isHorizontal = true,
       OnBannerItemClick this.bannerPress,
       CustomBuild this.build})
@@ -146,7 +146,16 @@ class BannerState extends State<BannerWidget> {
   }
 
   Widget getBannerTextInfoWidget() {
-    if (widget.isHorizontal) {
+    ///只有指示点的
+    return Align(
+      alignment: Alignment.center,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: circle(),
+      ),
+    );
+    ///带详情的
+    /* if (widget.isHorizontal) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -175,7 +184,7 @@ class BannerState extends State<BannerWidget> {
           ),
         ],
       );
-    }
+    }*/
   }
 
   List<Widget> circle() {
