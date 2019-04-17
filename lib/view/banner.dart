@@ -224,7 +224,7 @@ class BannerItem {
       maxLines: 3,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
-          color: Colors.white, fontSize: 12.0, decoration: TextDecoration.none),
+          color: Colors.black, fontSize: 12.0, decoration: TextDecoration.none),
     );
 
     item.itemText = textWidget;
