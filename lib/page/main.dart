@@ -33,7 +33,7 @@ void main() {
   (dio.transformer as DefaultTransformer).jsonDecodeCallback = parseJson;
   dio.options.receiveTimeout = 15000;
   dio.options.connectTimeout = 15000;
-  dio.options.baseUrl = AppConstance.APP_HOST_URL;
+//  dio.options.baseUrl = AppConstance.APP_HOST_URL;
 
   runZoned(
     () => runApp(MyApp()),
