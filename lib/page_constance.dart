@@ -1,5 +1,5 @@
-import 'package:model_mall/page/login.dart';
-import 'package:model_mall/page/home.dart';
+import 'package:model_mall/page/account/login.dart';
+import 'package:model_mall/page/home/home.dart';
 import 'package:model_mall/page/mainScreen.dart';
 import 'package:flutter/material.dart';
 

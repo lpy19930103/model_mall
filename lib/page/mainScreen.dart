@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'order.dart';
-import 'mine.dart';
+import 'package:model_mall/page/home/home.dart';
+import 'package:model_mall/page/order/order.dart';
+import 'package:model_mall/page/mine/mine.dart';
 import 'package:model_mall/view/bottom_bar/bottom_tab_bar.dart';
+import 'package:model_mall/event/event.dart';
 
 class MainScreenPage extends StatefulWidget {
   @override
@@ -18,11 +21,25 @@ class _MainScreenState extends State<MainScreenPage>
   List _bodys = [HomePage(), OrderPage(), MinePage()];
   var _titles = ['首页', '订单', '我'];
   var _icons = [Icons.home, Icons.reorder, Icons.perm_identity];
+  StreamSubscription subscription;
 
   @override
   void initState() {
-    badgeNo1 = '11';
     super.initState();
+    subscription = eventBus.on().listen((event) {
+      setState(() {
+        badgeNo1 = event.count.toString();
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if (subscription != null) {
+      subscription.cancel();
+      subscription = null;
+    }
   }
 
   @override

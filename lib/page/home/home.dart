@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:model_mall/view/banner.dart';
+import 'dart:math';
+import 'package:model_mall/event/event.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -76,6 +78,9 @@ class _HomeState extends State<HomePage> {
               bannerList,
               bannerPress: (pos, item) {
                 print('第 $pos 点击了');
+                BottomCountEvent event =
+                    new BottomCountEvent(Random().nextInt(100));
+                eventBus.fire(event);
               },
             ),
           ),
@@ -88,7 +93,6 @@ class _HomeState extends State<HomePage> {
           itemExtent: 120,
         )
       ],
-
     ));
   }
 }
