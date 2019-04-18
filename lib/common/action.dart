@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 
 import 'http.dart';
 import 'package:dio/dio.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:model_mall/common/http/result_code.dart';
 import 'package:model_mall/common/http/result_model.dart';
 import 'config.dart';
@@ -27,27 +26,23 @@ class Action {
   static init() {}
 
   static post(url, params) async {
-    dio.options.method = "post";
-    return await requestBase(url, params, baseHeader);
+    dio.options.method = "POST";
+    return await requestBase(url, params, baseHeader, method: "POST");
   }
 
   static get(url, params) async {
-    dio.options.method = "get";
-    return await requestBase(url, params, baseHeader);
+    return await requestBase(url, params, baseHeader, method: "GET");
   }
 
-  static requestBase(
-    url,
-    params,
-    Map<String, String> header,
-  ) async {
+  static requestBase(url, params, Map<String, String> header,
+      {method: "POST"}) async {
     ///判断网络连接
-    var connectivityResult = await (new Connectivity().checkConnectivity());
+/*    var connectivityResult = await (new Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile) {
     } else if (connectivityResult == ConnectivityResult.wifi) {
     } else if (connectivityResult == ConnectivityResult.none) {
       return ResultModel(ResultCode.NETWORK_ERROR, "请检查网络");
-    }
+    }*/
 
     ///处理请求头
     Map<String, String> headers = new HashMap();
@@ -55,10 +50,15 @@ class Action {
       headers.addAll(header);
     }
     dio.options.headers = headers;
+    dio.options.method = method;
 
     Response response;
     try {
-      response = await dio.request(url, data: params, options: options);
+      if (method == "GET") {
+        response = await dio.request(url, queryParameters: params);
+      } else {
+        response = await dio.request(url, data: params);
+      }
     } on DioError catch (error) {
       /// 请求错误处理
       Response errorResponse;
@@ -96,7 +96,7 @@ class Action {
         if (json == null) {
           return ResultModel(ResultCode.RESPONSE_EMPTY, "服务器响应未空");
         } else {
-          return ResultModel(json['code'], json['msg'], data: json['data']);
+          return ResultModel(json['code'], json['message'], data: json['data']);
         }
       }
     } catch (error) {

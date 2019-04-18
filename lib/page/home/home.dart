@@ -2,11 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:model_mall/common/app_constance.dart';
 import 'package:model_mall/common/http.dart';
+import 'package:model_mall/common/http/result_model.dart';
 import 'package:model_mall/common/toast.dart';
 import 'package:model_mall/view/banner.dart';
 import 'dart:math';
 import 'package:model_mall/event/event.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:model_mall/common/action.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,10 +27,10 @@ class _HomeState extends State<HomePage> {
     super.initState();
     _getBanner();
   }
-
   void _getBanner() async {
-    Response response =
-        await dio.get(Urls.BANNER, queryParameters: {"type": 0});
+
+/*    Response response =
+    await dio.get(Urls.BANNER, queryParameters: {"type": 0});
     print("response = " + response.toString());
     var res = response.data;
     print("res = " + res);
@@ -42,6 +44,20 @@ class _HomeState extends State<HomePage> {
       setState(() {});
     } else {
       Toast.toast(context, res['message']);
+    }*/
+
+    ResultModel resultModel = Action.get(Urls.BANNER, {"type": 0});
+    print("resultModel = " + resultModel.toString());
+    if (resultModel.success) {
+      List data = resultModel.data;
+      data.forEach((banner) {
+        BannerItem item = BannerItem.defaultBannerItem(
+            banner['bannerImage'], banner['title']);
+        bannerList.add(item);
+      });
+      setState(() {});
+    } else {
+      Toast.toast(context, resultModel.msg);
     }
   }
 
