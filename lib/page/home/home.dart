@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomeState extends State<HomePage> {
   GlobalKey<EasyRefreshState> _easyRefreshKey =
-  new GlobalKey<EasyRefreshState>();
+      new GlobalKey<EasyRefreshState>();
   List<BannerItem> bannerList = [];
 
   @override
@@ -28,8 +28,10 @@ class _HomeState extends State<HomePage> {
 
   void _getBanner() async {
     Response response =
-    await dio.get(Urls.BANNER, queryParameters: {"type": 0});
+        await dio.get(Urls.BANNER, queryParameters: {"type": 0});
+    print("response = " + response.toString());
     var res = response.data;
+    print("res = " + res);
     if (res['code'] == 200) {
       List data = res['data'];
       data.forEach((banner) {
@@ -51,41 +53,41 @@ class _HomeState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Container(
         child: new EasyRefresh(
-          key: _easyRefreshKey,
-          child: CustomScrollView(
-            slivers: <Widget>[
-              SliverAppBar(
-                actions: <Widget>[],
-                title: Text("Home"),
+      key: _easyRefreshKey,
+      child: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            actions: <Widget>[],
+            title: Text("Home"),
 //              backgroundColor: Theme.of(context).primaryColor,
-                expandedHeight: 200,
-                flexibleSpace: FlexibleSpaceBar(
-                  background: BannerWidget(
-                    200,
-                    bannerList,
-                    bannerPress: (pos, item) {
-                      print('第 $pos 点击了');
-                      BottomCountEvent event =
+            expandedHeight: 200,
+            flexibleSpace: FlexibleSpaceBar(
+              background: BannerWidget(
+                200,
+                bannerList,
+                bannerPress: (pos, item) {
+                  print('第 $pos 点击了');
+                  BottomCountEvent event =
                       new BottomCountEvent(Random().nextInt(100));
-                      eventBus.fire(event);
-                    },
-                  ),
-                ),
-                pinned: true, //固定导航栏
+                  eventBus.fire(event);
+                },
               ),
-              SliverFixedExtentList(
-                delegate: SliverChildListDelegate(bannerList.map((item) {
-                  return _buildItem(item);
-                }).toList()),
-                itemExtent: 120,
-              )
-            ],
+            ),
+            pinned: true, //固定导航栏
           ),
-          onRefresh: () async {
-            _getBanner();
-          },
+          SliverFixedExtentList(
+            delegate: SliverChildListDelegate(bannerList.map((item) {
+              return _buildItem(item);
+            }).toList()),
+            itemExtent: 120,
+          )
+        ],
+      ),
+      onRefresh: () async {
+        _getBanner();
+      },
 //      loadMore: () {},
-        ));
+    ));
   }
 }
 
@@ -111,7 +113,7 @@ class _HomePageState extends State<HomePage>
         title: Text("首页"),
         centerTitle: true,
         bottom: TabBar(
-          //生成Tab菜单
+            //生成Tab菜单
             controller: _tabController,
             tabs: tabs.map((e) => Tab(text: e)).toList()),
       ),

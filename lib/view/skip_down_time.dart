@@ -95,13 +95,11 @@ class _SkipDownTimeProgressState extends State<SkipDownTimeProgress>
   @override
   void dispose() {
     super.dispose();
-    print('dispose----------------------');
     animationController.dispose();
   }
 
   void _onSkipClick() {
     if (widget.clickListener != null) {
-      print('skip onclick ---------------');
       widget.clickListener.onSkipClick();
     }
   }

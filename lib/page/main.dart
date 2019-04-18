@@ -8,32 +8,30 @@ import 'package:flutter/material.dart';
 import 'package:model_mall/page/splash.dart';
 import 'package:model_mall/page_constance.dart';
 import 'package:model_mall/common/http.dart';
-import 'package:model_mall/common/app_constance.dart';
 
 // Must be top-level function
 _parseAndDecode(String response) {
   return jsonDecode(response);
 }
 
-parseJson(String text) {
+_parseJson(String text) {
   return compute(_parseAndDecode, text);
 }
 
-void collectLog(String line) {
-  //收集日志
-}
-
-void reportErrorAndLog(Object obj, StackTrace stack) {
+void _reportErrorAndLog(Object obj, StackTrace stack) {
   print("Error : " + obj.toString());
 }
 
-void main() {
-// add interceptors
+void _initDio() {
   dio.interceptors..add(CookieManager(CookieJar()))..add(LogInterceptor());
-  (dio.transformer as DefaultTransformer).jsonDecodeCallback = parseJson;
+  (dio.transformer as DefaultTransformer).jsonDecodeCallback = _parseJson;
   dio.options.receiveTimeout = 15000;
   dio.options.connectTimeout = 15000;
-//  dio.options.baseUrl = AppConstance.APP_HOST_URL;
+  //  dio.options.baseUrl = AppConstance.APP_HOST_URL;
+}
+
+void main() {
+  _initDio();
 
   runZoned(
     () => runApp(MyApp()),
@@ -43,7 +41,7 @@ void main() {
       },
     ),
     onError: (Object obj, StackTrace stack) {
-      reportErrorAndLog(obj, stack);
+      _reportErrorAndLog(obj, stack);
     },
   );
 }
@@ -52,7 +50,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,//去除debug角标
+      debugShowCheckedModeBanner: false,
+      //去除debug角标
       title: 'Mall',
       theme: ThemeData(
         primarySwatch: Colors.red,
