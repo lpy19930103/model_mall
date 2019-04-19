@@ -10,6 +10,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+        resizeToAvoidBottomPadding: false, //键盘不顶起view
         appBar: new AppBar(
           backgroundColor: Color(0xFFF90850),
           leading: IconButton(
@@ -259,6 +260,10 @@ Widget _contactUs() {
 }
 
 class VerifyCodeBar extends StatefulWidget {
+  TextEditingController phoneController;
+
+  VerifyCodeBar(this.phoneController);
+
   @override
   State<StatefulWidget> createState() {
     return VerifyCodeBarState();
@@ -278,7 +283,7 @@ class VerifyCodeBarState extends State<VerifyCodeBar> {
         return;
       }
       _seconds--;
-      _verifyStr = '$_seconds(s)';
+      _verifyStr = '重新发送 $_seconds s';
       setState(() {});
       if (_seconds == 0) {
         _verifyStr = '重新发送';
@@ -293,7 +298,7 @@ class VerifyCodeBarState extends State<VerifyCodeBar> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (_seconds == 0)
+      onTap: (widget.phoneController.text.length == 11 && _seconds == 0)
           ? () {
               setState(() {
                 _startTimer();
@@ -305,12 +310,8 @@ class VerifyCodeBarState extends State<VerifyCodeBar> {
         width: 108.0,
         height: 30.0,
         decoration: new BoxDecoration(
-          color: Color(0xFFF90850),
+          color: _seconds == 0 ? Color(0xFFF90850) : Color(0xFFD8D8D8),
           borderRadius: BorderRadius.all(Radius.circular(30)),
-          border: new Border.all(
-            width: 1.0,
-            color: Color(0xFFF90850),
-          ),
         ),
         child: new Text(
           '$_verifyStr',
