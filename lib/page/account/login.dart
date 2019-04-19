@@ -52,11 +52,84 @@ class _LoginState extends State<LoginWidget> {
             _CustomTextField(phoneController),
             _PwdTextField(passController),
             _contactUs(),
-            _loginButton(),
+            _loginButton(phoneController, passController),
           ],
         ),
         _weChatWidget()
       ],
+    );
+  }
+
+  Widget _CustomTextField(TextEditingController phoneController) {
+    return Container(
+        padding:
+            const EdgeInsets.only(left: 20, top: 39, bottom: 10, right: 20),
+        child: Container(
+          height: 62,
+          child: Stack(
+            alignment: Alignment.centerLeft,
+            children: <Widget>[
+              Image.asset(
+                'assets/images/icon_phone.png',
+                width: 16,
+                height: 16,
+              ),
+              TextField(
+                maxLength: 11,
+                maxLines: 1,
+                controller: phoneController,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  contentPadding:
+                      EdgeInsets.only(top: 10, bottom: 10, left: 40),
+                  labelText: '请输入账号',
+//            helperText: "请输入手机号"
+                ),
+                autofocus: false,
+                onChanged: (str) {
+                  setState(() {});
+                },
+              )
+            ],
+          ),
+        ));
+  }
+
+  Widget _PwdTextField(TextEditingController passController) {
+    return Container(
+      padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10, right: 20),
+      child: Container(
+        height: 60,
+        child: Stack(
+          alignment: Alignment.centerLeft,
+          children: <Widget>[
+            Image.asset(
+              'assets/images/icon_pwd.png',
+              width: 16,
+              height: 16,
+            ),
+            TextField(
+              maxLength: 6,
+              maxLines: 1,
+              obscureText: true,
+              controller: passController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 40),
+                labelText: '请输入验证码',
+              ),
+              autofocus: false,
+              onChanged: (str) {
+                setState(() {});
+              },
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: VerifyCodeBar(),
+            )
+          ],
+        ),
+      ),
     );
   }
 
@@ -73,16 +146,6 @@ class _LoginState extends State<LoginWidget> {
     }
   }
 
-  void _login() {
-    if (phoneController.text.length != 11) {
-      Toast.toast(context, "请输入正确的手机号");
-    } else if (passController.text.length == 0) {
-      Toast.toast(context, "请填写密码");
-    } else {
-      login();
-    }
-  }
-
   void _goHome() {
     phoneController.clear();
     passController.clear();
@@ -90,7 +153,19 @@ class _LoginState extends State<LoginWidget> {
         PageConstance.MAIN_SCREEN_PAGE, (Route<dynamic> route) => false);
   }
 
-  Widget _loginButton() {
+  bool _canLogin(TextEditingController phoneController,
+      TextEditingController passController) {
+    return phoneController.text.length == 11 && passController.text.length == 6;
+  }
+
+  void _login() {
+    if (_canLogin(phoneController, passController)) {
+      login();
+    }
+  }
+
+  Widget _loginButton(TextEditingController phoneController,
+      TextEditingController passController) {
     return Container(
       padding: const EdgeInsets.only(left: 20, top: 67, right: 20),
       child: InkWell(
@@ -99,7 +174,9 @@ class _LoginState extends State<LoginWidget> {
           alignment: Alignment.center,
           height: 44.0,
           decoration: new BoxDecoration(
-            color: Color(0xFFF90850),
+            color: _canLogin(phoneController, passController)
+                ? Color(0xFFF90850)
+                : Color(0xFFD8D8D8),
             borderRadius: BorderRadius.all(Radius.circular(30)),
           ),
           child: new Text(
@@ -242,69 +319,4 @@ class VerifyCodeBarState extends State<VerifyCodeBar> {
       ),
     );
   }
-}
-
-Widget _CustomTextField(TextEditingController phoneController) {
-  return Container(
-      padding: const EdgeInsets.only(left: 20, top: 39, bottom: 10, right: 20),
-      child: Container(
-        height: 62,
-        child: Stack(
-          alignment: Alignment.centerLeft,
-          children: <Widget>[
-            Image.asset(
-              'assets/images/icon_phone.png',
-              width: 16,
-              height: 16,
-            ),
-            TextField(
-              maxLength: 11,
-              maxLines: 1,
-              controller: phoneController,
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 40),
-                labelText: '请输入账号',
-//            helperText: "请输入手机号"
-              ),
-              autofocus: false,
-            )
-          ],
-        ),
-      ));
-}
-
-Widget _PwdTextField(TextEditingController passController) {
-  return Container(
-    padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10, right: 20),
-    child: Container(
-      height: 60,
-      child: Stack(
-        alignment: Alignment.centerLeft,
-        children: <Widget>[
-          Image.asset(
-            'assets/images/icon_pwd.png',
-            width: 16,
-            height: 16,
-          ),
-          TextField(
-            maxLength: 6,
-            maxLines: 1,
-            obscureText: true,
-            controller: passController,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 40),
-              labelText: '请输入验证码',
-            ),
-            autofocus: false,
-          ),
-          Align(
-            alignment: Alignment.centerRight,
-            child: VerifyCodeBar(),
-          )
-        ],
-      ),
-    ),
-  );
 }
