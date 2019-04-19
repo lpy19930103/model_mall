@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:model_mall/page/splash.dart';
 import 'package:model_mall/page_constance.dart';
-import 'package:model_mall/common/http.dart';
+import 'package:model_mall/common/http/http.dart';
 
 // Must be top-level function
 _parseAndDecode(String response) {

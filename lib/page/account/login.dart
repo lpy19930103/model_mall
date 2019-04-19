@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:model_mall/page_constance.dart';
-import 'package:model_mall/common/toast.dart';
-import 'package:model_mall/common/http.dart';
+import 'package:model_mall/common/utils/toast.dart';
+import 'package:model_mall/common/http/http.dart';
 
 class LoginPage extends StatelessWidget {
   @override

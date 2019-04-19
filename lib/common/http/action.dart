@@ -1,12 +1,12 @@
 import 'dart:collection';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:model_mall/common/config.dart';
 
 import 'http.dart';
 import 'package:dio/dio.dart';
 import 'package:model_mall/common/http/result_code.dart';
 import 'package:model_mall/common/http/result_model.dart';
-import 'config.dart';
 
 class Action {
   static String baseUrl = '';

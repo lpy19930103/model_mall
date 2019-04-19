@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:model_mall/common/app_constance.dart';
 import 'package:model_mall/common/http/result_model.dart';
-import 'package:model_mall/common/toast.dart';
+import 'package:model_mall/common/utils/toast.dart';
 import 'package:model_mall/view/banner.dart';
 import 'dart:math';
 import 'package:model_mall/event/event.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:model_mall/common/action.dart';
+import 'package:model_mall/common/http/action.dart';
 
 class HomePage extends StatefulWidget {
   @override
