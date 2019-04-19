@@ -50,8 +50,8 @@ class _LoginState extends State<LoginWidget> {
         new ListView(
           children: <Widget>[
             _title(),
-            _CustomTextField(phoneController),
-            _PwdTextField(passController),
+            _CustomTextField(),
+            _PwdTextField(),
             _contactUs(),
             _loginButton(phoneController, passController),
           ],
@@ -61,7 +61,7 @@ class _LoginState extends State<LoginWidget> {
     );
   }
 
-  Widget _CustomTextField(TextEditingController phoneController) {
+  Widget _CustomTextField() {
     return Container(
         padding:
             const EdgeInsets.only(left: 20, top: 39, bottom: 10, right: 20),
@@ -96,7 +96,7 @@ class _LoginState extends State<LoginWidget> {
         ));
   }
 
-  Widget _PwdTextField(TextEditingController passController) {
+  Widget _PwdTextField() {
     return Container(
       padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10, right: 20),
       child: Container(
@@ -126,7 +126,7 @@ class _LoginState extends State<LoginWidget> {
             ),
             Align(
               alignment: Alignment.centerRight,
-              child: VerifyCodeBar(),
+              child: VerifyCodeBar(phoneController),
             )
           ],
         ),
