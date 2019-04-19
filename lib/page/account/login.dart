@@ -33,8 +33,8 @@ class _LoginState extends State<LoginWidget> {
   Widget build(BuildContext context) {
     return new Column(
       children: <Widget>[
-        new CustomTextField(phoneController),
-        new PwdTextField(passController),
+        _CustomTextField(phoneController),
+        _PwdTextField(passController),
         RaisedButton(
           onPressed: _login,
           child: Text('登录'),
@@ -74,51 +74,58 @@ class _LoginState extends State<LoginWidget> {
   }
 }
 
-class CustomTextField extends StatelessWidget {
-  TextEditingController phoneController;
-
-  CustomTextField(this.phoneController) {}
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 30, top: 150, bottom: 20, right: 30),
-      child: TextField(
-        controller: phoneController,
-        keyboardType: TextInputType.phone,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(top: 10, bottom: 10),
-          icon: Icon(Icons.perm_identity),
-          labelText: '请输入账号',
-//            helperText: "请输入手机号"
+Widget _CustomTextField(TextEditingController phoneController) {
+  return Container(
+    padding: const EdgeInsets.only(left: 20, top: 150, bottom: 20, right: 20),
+    child: Stack(
+      alignment: Alignment.centerLeft,
+      children: <Widget>[
+        Image.asset(
+          'assets/images/icon_phone.png',
+          width: 16,
+          height: 16,
         ),
-        autofocus: false,
-      ),
-    );
-  }
+        TextField(
+          maxLength: 11,
+          maxLines: 1,
+          controller: phoneController,
+          keyboardType: TextInputType.phone,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 40),
+            labelText: '请输入账号',
+//            helperText: "请输入手机号"
+          ),
+          autofocus: false,
+        )
+      ],
+    ),
+  );
 }
 
-class PwdTextField extends StatelessWidget {
-  TextEditingController passController;
-
-  PwdTextField(this.passController) {}
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(left: 30, top: 30, bottom: 20, right: 30),
-      child: TextField(
-        controller: passController,
-        keyboardType: TextInputType.text,
-        obscureText: true,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(top: 10, bottom: 10),
-          icon: Icon(Icons.lock_open),
-          labelText: '请输入密码',
-//            helperText: "请输入手机号"
+Widget _PwdTextField(TextEditingController passController) {
+  return Container(
+    padding: const EdgeInsets.only(left: 20, top: 5, bottom: 20, right: 20),
+    child: Stack(
+      alignment: Alignment.centerLeft,
+      children: <Widget>[
+        Image.asset(
+          'assets/images/icon_pwd.png',
+          width: 16,
+          height: 16,
         ),
-        autofocus: false,
-      ),
-    );
-  }
+        TextField(
+          maxLength: 6,
+          maxLines: 1,
+          obscureText: true,
+          controller: passController,
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(top: 10, bottom: 10, left: 40),
+            labelText: '请输入验证码',
+          ),
+          autofocus: false,
+        )
+      ],
+    ),
+  );
 }

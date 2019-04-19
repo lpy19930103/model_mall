@@ -28,6 +28,8 @@ dependencies:
   event_bus: ^1.1.0
   flutter_easyrefresh: ^1.2.7 #下拉刷新
   connectivity: ^0.4.3 #网络连接
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -43,6 +45,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+  - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

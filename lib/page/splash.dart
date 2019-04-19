@@ -65,7 +65,7 @@ class _WelcomePageState extends State<WelcomePage>
 //跳转方法
   _goHomePage() {
     Navigator.of(context).pushNamedAndRemoveUntil(
-        PageConstance.MAIN_SCREEN_PAGE, (Route<dynamic> route) => false);
+        PageConstance.LOGIN_PAGE, (Route<dynamic> route) => false);
   }
 
   @override
