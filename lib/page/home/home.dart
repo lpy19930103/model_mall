@@ -1,7 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:model_mall/common/app_constance.dart';
-import 'package:model_mall/common/http.dart';
 import 'package:model_mall/common/http/result_model.dart';
 import 'package:model_mall/common/toast.dart';
 import 'package:model_mall/view/banner.dart';
@@ -27,8 +25,8 @@ class _HomeState extends State<HomePage> {
     super.initState();
     _getBanner();
   }
-  void _getBanner() async {
 
+  void _getBanner() async {
 /*    Response response =
     await dio.get(Urls.BANNER, queryParameters: {"type": 0});
     print("response = " + response.toString());
@@ -46,8 +44,7 @@ class _HomeState extends State<HomePage> {
       Toast.toast(context, res['message']);
     }*/
 
-    ResultModel resultModel = Action.get(Urls.BANNER, {"type": 0});
-    print("resultModel = " + resultModel.toString());
+    ResultModel resultModel = await Action.get(Urls.BANNER, {"type": 0});
     if (resultModel.success) {
       List data = resultModel.data;
       data.forEach((banner) {

@@ -23,7 +23,8 @@ void _reportErrorAndLog(Object obj, StackTrace stack) {
 }
 
 void _initDio() {
-  dio.interceptors..add(CookieManager(CookieJar()))..add(LogInterceptor());
+  dio.interceptors..add(CookieManager(CookieJar()));
+//    ..add(LogInterceptor());
   (dio.transformer as DefaultTransformer).jsonDecodeCallback = _parseJson;
   dio.options.receiveTimeout = 15000;
   dio.options.connectTimeout = 15000;
