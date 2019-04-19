@@ -48,7 +48,7 @@ class _WelcomePageState extends State<WelcomePage>
             child: new Container(
               padding: const EdgeInsets.only(top: 30, right: 20.0),
               child: new SkipDownTimeProgress(
-                Colors.red,
+                Color(0xFFF90850),
                 22,
                 new Duration(seconds: 3),
                 new Size(25, 25),

@@ -132,7 +132,7 @@ enum BottomTabBarType {
 ///               title: Text(titles[3])),
 ///           BottomTabBarItem(icon: Icon(icons[4]), title: Text(titles[4])),
 ///         ],
-///         fixedColor: Colors.red,
+///         fixedColor: Color(0xFFF90850),
 ///         currentIndex: _selectedIndex,
 ///         onTap: _onItemSelected,
 ///         type: BottomTabBarType.fixed,

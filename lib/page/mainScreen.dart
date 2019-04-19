@@ -55,13 +55,13 @@ class _MainScreenState extends State<MainScreenPage>
           BottomTabBarItem(icon: Icon(_icons[1]), title: Text(_titles[1])),
           BottomTabBarItem(icon: Icon(_icons[2]), title: Text(_titles[2])),
         ],
-        fixedColor: Colors.red,
+        fixedColor: Color(0xFFF90850),
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         type: BottomTabBarType.fixed,
         isAnimation: false,
         isInkResponse: false,
-        badgeColor: Colors.red,
+        badgeColor: Color(0xFFF90850),
       ),
     );
   }
