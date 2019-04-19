@@ -10,10 +10,21 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-//        appBar: new AppBar(
-//          title: new Text('Welcome to Flutter'),
-//        ),
+        appBar: new AppBar(
+          backgroundColor: Color(0xFFF90850),
+          leading: IconButton(
+              icon: Image.asset(
+                'assets/images/icon_back.png',
+                width: 9,
+                height: 17,
+              ),
+              onPressed: _back(context)),
+        ),
         body: LoginWidget());
+  }
+
+  _back(BuildContext context) {
+    Navigator.maybePop(context, "ha");
   }
 }
 
@@ -33,11 +44,18 @@ class _LoginState extends State<LoginWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return new ListView(
+    return Stack(
       children: <Widget>[
-        _CustomTextField(phoneController),
-        _PwdTextField(passController),
-        _loginButton(),
+        new ListView(
+          children: <Widget>[
+            _title(),
+            _CustomTextField(phoneController),
+            _PwdTextField(passController),
+            _contactUs(),
+            _loginButton(),
+          ],
+        ),
+        _weChatWidget()
       ],
     );
   }
@@ -83,7 +101,6 @@ class _LoginState extends State<LoginWidget> {
           decoration: new BoxDecoration(
             color: Color(0xFFF90850),
             borderRadius: BorderRadius.all(Radius.circular(30)),
-
           ),
           child: new Text(
             '登录',
@@ -93,6 +110,75 @@ class _LoginState extends State<LoginWidget> {
       ),
     );
   }
+}
+
+void _weChat() {
+  //todo 微信登录
+}
+
+Widget _weChatWidget() {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: <Widget>[
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            color: Color(0xFFE6E6E6),
+            height: 1,
+            width: 110,
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            alignment: Alignment.center,
+            child: Text("第三方账号登录",
+                style: TextStyle(fontSize: 14, color: Color(0xff333333))),
+          ),
+          Container(
+            color: Color(0xFFE6E6E6),
+            height: 1,
+            width: 110,
+          )
+        ],
+      ),
+      IconButton(
+        padding: const EdgeInsets.all(0),
+        icon: Image.asset(
+          'assets/images/icon_wechat.png',
+          width: 32,
+          height: 32,
+        ),
+        onPressed: _weChat,
+      ),
+      Container(
+        padding: const EdgeInsets.only(bottom: 15),
+        child: Text("微信",
+            style: TextStyle(fontSize: 10, color: Color(0xFF666666))),
+      )
+    ],
+  );
+}
+
+Widget _title() {
+  return Container(
+    padding: const EdgeInsets.only(left: 20, top: 20),
+    alignment: Alignment.centerLeft,
+    child: Text(
+      '手机号登录/注册',
+      style: new TextStyle(fontSize: 24.0, color: Color(0xFF333333)),
+    ),
+  );
+}
+
+Widget _contactUs() {
+  return Container(
+    padding: const EdgeInsets.only(right: 20, top: 7),
+    alignment: Alignment.centerRight,
+    child: Text(
+      '收不到验证码？联系客服',
+      style: new TextStyle(fontSize: 12.0, color: Color(0xFF999999)),
+    ),
+  );
 }
 
 class VerifyCodeBar extends StatefulWidget {
@@ -160,7 +246,7 @@ class VerifyCodeBarState extends State<VerifyCodeBar> {
 
 Widget _CustomTextField(TextEditingController phoneController) {
   return Container(
-      padding: const EdgeInsets.only(left: 20, top: 150, bottom: 10, right: 20),
+      padding: const EdgeInsets.only(left: 20, top: 39, bottom: 10, right: 20),
       child: Container(
         height: 62,
         child: Stack(
