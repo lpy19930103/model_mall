@@ -31,7 +31,7 @@ class BannerWidget extends StatefulWidget {
       {Key key,
       int this.duration = 5000,
       double this.pointRadius = 3.0,
-      Color this.selectedColor = Color(0xFFF90850),
+      Color this.selectedColor = const Color(0xFFF90850),
       Color this.unSelectedColor = Colors.white,
       Color this.textBackgroundColor = const Color(0x00000000),
       bool this.isHorizontal = true,
