@@ -161,7 +161,8 @@ class _LoginState extends State<LoginWidget> {
 
   void _login() {
     if (_canLogin(phoneController, passController)) {
-      login();
+//      login();
+      _goHome();
     }
   }
 
