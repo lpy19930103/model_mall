@@ -24,7 +24,7 @@ void _reportErrorAndLog(Object obj, StackTrace stack) {
   print("Error : " + obj.toString());
 }
 
-void _initDio() {
+_initDio() {
   dio.interceptors..add(CookieManager(CookieJar()));
 //    ..add(LogInterceptor());
   (dio.transformer as DefaultTransformer).jsonDecodeCallback = _parseJson;
@@ -33,13 +33,19 @@ void _initDio() {
   //  dio.options.baseUrl = AppConstance.APP_HOST_URL;
 }
 
-void _initWechat() {
-  fluwx.register(appId: AppConstance.WECHAT_APPID);
+_initFluwx() async {
+  await fluwx.register(
+      appId: "wxd930ea5d5a258f4f",
+      doOnAndroid: true,
+      doOnIOS: true,
+      enableMTA: false);
+  var result = await fluwx.isWeChatInstalled();
+  print("initFluwx is installed $result");
 }
 
 void main() {
   _initDio();
-  _initWechat();
+  _initFluwx();
   runZoned(
     () => runApp(MyApp()),
     zoneSpecification: ZoneSpecification(
