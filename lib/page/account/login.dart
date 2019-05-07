@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:model_mall/page_constance.dart';
 import 'package:model_mall/common/utils/toast.dart';
 import 'package:model_mall/common/http/http.dart';
+import 'package:fluwx/fluwx.dart' as fluwx;
 
 class LoginPage extends StatelessWidget {
   @override
@@ -192,7 +193,8 @@ class _LoginState extends State<LoginWidget> {
 }
 
 void _weChat() {
-  //todo 微信登录
+  fluwx.sendAuth(
+      scope: "snsapi_userinfo", state: "wechat_sdk_demo_test");
 }
 
 Widget _weChatWidget() {

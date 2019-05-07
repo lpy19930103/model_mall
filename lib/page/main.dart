@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:model_mall/page/splash.dart';
 import 'package:model_mall/page_constance.dart';
 import 'package:model_mall/common/http/http.dart';
+import 'package:fluwx/fluwx.dart' as fluwx;
+import 'package:model_mall/common/app_constance.dart';
 
 // Must be top-level function
 _parseAndDecode(String response) {
@@ -31,9 +33,13 @@ void _initDio() {
   //  dio.options.baseUrl = AppConstance.APP_HOST_URL;
 }
 
+void _initWechat() {
+  fluwx.register(appId: AppConstance.WECHAT_APPID);
+}
+
 void main() {
   _initDio();
-
+  _initWechat();
   runZoned(
     () => runApp(MyApp()),
     zoneSpecification: ZoneSpecification(
@@ -55,7 +61,7 @@ class MyApp extends StatelessWidget {
       //去除debug角标
       title: 'Mall',
       theme: ThemeData(
-        primaryColor:  Color(0xFFF90850),
+        primaryColor: Color(0xFFF90850),
       ),
       home: WelcomePage(),
       routes: PageConstance.getRoutes(),
