@@ -45,6 +45,17 @@ class _LoginState extends State<LoginWidget> {
   TextEditingController passController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    fluwx.responseFromAuth.listen((data) {
+      setState(() {
+        print("wx auth ${data.errCode}");
+        //todo 获取code去请求wx user info
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
@@ -193,8 +204,9 @@ class _LoginState extends State<LoginWidget> {
 }
 
 void _weChat() {
-  fluwx.sendAuth(
-      scope: "snsapi_userinfo", state: "wechat_sdk_demo_test");
+  fluwx
+      .sendAuth(scope: "snsapi_userinfo", state: "wechat_sdk_demo_test")
+      .then((data) {});
 }
 
 Widget _weChatWidget() {
