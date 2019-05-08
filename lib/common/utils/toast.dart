@@ -5,7 +5,7 @@ class Toast {
   static bool _showing = false; //toast是否正在showing
   static DateTime _startedTime; //开启一个新toast的当前时间，用于对比是否已经展示了足够时间
   static String _msg;
-  static int duration = 500;
+  static int duration = 1000;
 
   static void toast(
     BuildContext context,

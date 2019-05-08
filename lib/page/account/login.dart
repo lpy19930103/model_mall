@@ -10,6 +10,10 @@ import 'package:fluwx/fluwx.dart' as fluwx;
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    _back() {
+      Navigator.pop(context);
+    }
+
     return new Scaffold(
         resizeToAvoidBottomPadding: false, //键盘不顶起view
         appBar: new AppBar(
@@ -20,13 +24,9 @@ class LoginPage extends StatelessWidget {
                 width: 9,
                 height: 17,
               ),
-              onPressed: _back(context)),
+              onPressed: _back),
         ),
         body: LoginWidget());
-  }
-
-  _back(BuildContext context) {
-    Navigator.maybePop(context, "ha");
   }
 }
 
@@ -160,10 +160,11 @@ class _LoginState extends State<LoginWidget> {
   }
 
   void _goHome() {
+    Navigator.pop(context, phoneController.text);
     phoneController.clear();
     passController.clear();
-    Navigator.of(context).pushNamedAndRemoveUntil(
-        PageConstance.MAIN_SCREEN_PAGE, (Route<dynamic> route) => false);
+   /* Navigator.of(context).pushNamedAndRemoveUntil(
+        PageConstance.MAIN_SCREEN_PAGE, (Route<dynamic> route) => false);*/
   }
 
   bool _canLogin(TextEditingController phoneController,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:model_mall/common/utils/toast.dart';
 import 'package:model_mall/page_constance.dart';
 import 'package:transparent_image/transparent_image.dart';
 
@@ -10,6 +11,9 @@ class MinePage extends StatefulWidget {
 }
 
 class _MinePageState extends State<MinePage> {
+  var userName = "登录/注册";
+  var loginType = "您暂时还未登录";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,11 +53,11 @@ class _MinePageState extends State<MinePage> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          "登录/注册",
+                          userName,
                           style: TextStyle(fontSize: 14, color: Colors.black38),
                         ),
                         Text(
-                          "您暂时还未登录",
+                          loginType,
                           style: TextStyle(fontSize: 14, color: Colors.black38),
                         )
                       ],
@@ -70,8 +74,15 @@ class _MinePageState extends State<MinePage> {
   }
 
   _login() {
-    Navigator.of(context).pushNamedAndRemoveUntil(
-        PageConstance.MAIN_SCREEN_PAGE, (Route<dynamic> route) => false);
+    if (userName == "登录/注册") {
+      Navigator.of(context).pushNamed(PageConstance.LOGIN_PAGE).then((data) {
+        Toast.toast(context, data);
+        setState(() {
+          userName = data;
+          loginType = "";
+        });
+      });
+    }
   }
 }
 
