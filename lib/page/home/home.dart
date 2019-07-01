@@ -19,10 +19,22 @@ class _HomeState extends State<HomePage> {
   GlobalKey<EasyRefreshState> _easyRefreshKey =
       new GlobalKey<EasyRefreshState>();
   List<BannerItem> bannerList = [];
+  List _data = [];
 
   @override
   void initState() {
     super.initState();
+    _data.add(
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561816749452&di=eed1bb1465a127858016d48426faebf9&imgtype=0&src=http%3A%2F%2Fpic.97uimg.com%2Fback_pic%2F20%2F16%2F03%2F12%2F7c2d4fec0b9390a6c632259c45063cb3.jpg%2521w1200");
+    _data.add(
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561816810805&di=254e0ffb4f083e13ed3d5b480d07b453&imgtype=0&src=http%3A%2F%2Fpic.97uimg.com%2Fback_pic%2F00%2F00%2F69%2F40%2F09573946046c3072c5900befb41ac723.jpg");
+    _data.add(
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561816749452&di=eed1bb1465a127858016d48426faebf9&imgtype=0&src=http%3A%2F%2Fpic.97uimg.com%2Fback_pic%2F20%2F16%2F03%2F12%2F7c2d4fec0b9390a6c632259c45063cb3.jpg%2521w1200");
+    _data.add(
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561816749452&di=eed1bb1465a127858016d48426faebf9&imgtype=0&src=http%3A%2F%2Fpic.97uimg.com%2Fback_pic%2F20%2F16%2F03%2F12%2F7c2d4fec0b9390a6c632259c45063cb3.jpg%2521w1200");
+    _data.add(
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1561816749452&di=eed1bb1465a127858016d48426faebf9&imgtype=0&src=http%3A%2F%2Fpic.97uimg.com%2Fback_pic%2F20%2F16%2F03%2F12%2F7c2d4fec0b9390a6c632259c45063cb3.jpg%2521w1200");
+
     _getBanner();
   }
 
@@ -44,18 +56,19 @@ class _HomeState extends State<HomePage> {
       Toast.toast(context, res['message']);
     }*/
 
-    ResultModel resultModel = await Action.get(Urls.BANNER, {"type": 0});
+/*    ResultModel resultModel = await Action.get(Urls.BANNER, {"type": 0});
     if (resultModel.success) {
-      List data = resultModel.data;
-      data.forEach((banner) {
-        BannerItem item = BannerItem.defaultBannerItem(
-            banner['bannerImage'], banner['title']);
-        bannerList.add(item);
-      });
-      setState(() {});
-    } else {
-      Toast.toast(context, resultModel.msg);
+      List data = resultModel.data;*/
+    bannerList.clear();
+    for (int i = 0; i < _data.length; i++) {
+      BannerItem item =
+          BannerItem.defaultBannerItem(_data[i], "index = " + i.toString());
+      bannerList.add(item);
     }
+    setState(() {});
+    /*   } else {
+      Toast.toast(context, resultModel.msg);
+    }*/
   }
 
   Widget _buildItem(BannerItem item) {
@@ -93,7 +106,8 @@ class _HomeState extends State<HomePage> {
               return _buildItem(item);
             }).toList()),
             itemExtent: 120,
-          )
+          ),
+          _SliverListDemo(_data)
         ],
       ),
       onRefresh: () async {
@@ -139,6 +153,60 @@ class _HomePageState extends State<HomePage>
             child: Text(e, textScaleFactor: 5),
           );
         }).toList(),
+      ),
+    );
+  }
+}
+
+class _SliverListDemo extends StatelessWidget {
+  var posts = [];
+
+  _SliverListDemo(this.posts);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return Padding(
+            padding: EdgeInsets.only(bottom: 32.0),
+            child: Material(
+                borderRadius: BorderRadius.circular(12.0),
+                elevation: 14.0,
+                shadowColor: Colors.green.withOpacity(0.5),
+                child: Stack(
+                  children: <Widget>[
+                    AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: Image.network(
+                        posts[index],
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned(
+                      top: 32.0,
+                      left: 32.0,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "列表" + index.toString(),
+                            style: TextStyle(
+                                fontSize: 20.0, color: Colors.greenAccent),
+                          ),
+                          Text(
+                            "列表" + index.toString(),
+                            style: TextStyle(
+                                fontSize: 23.0, color: Colors.greenAccent),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                )),
+          );
+        },
+        childCount: posts.length,
       ),
     );
   }

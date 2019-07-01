@@ -78,7 +78,7 @@ class _LoginState extends State<LoginWidget> {
         padding:
             const EdgeInsets.only(left: 20, top: 39, bottom: 10, right: 20),
         child: Container(
-          height: 62,
+          height: 85,
           child: Stack(
             alignment: Alignment.centerLeft,
             children: <Widget>[
@@ -112,7 +112,7 @@ class _LoginState extends State<LoginWidget> {
     return Container(
       padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10, right: 20),
       child: Container(
-        height: 60,
+        height: 85,
         child: Stack(
           alignment: Alignment.centerLeft,
           children: <Widget>[
