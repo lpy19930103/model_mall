@@ -172,11 +172,13 @@ class _SliverGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  SliverGrid(
+    return SliverPadding(
+      padding: EdgeInsets.all(10.0),
+      sliver: SliverGrid(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
           mainAxisSpacing: 10.0,
           crossAxisSpacing: 10.0,
+          crossAxisCount: 2,
           childAspectRatio: 1,
         ),
         delegate: SliverChildBuilderDelegate(
@@ -184,7 +186,7 @@ class _SliverGrid extends StatelessWidget {
             return Material(
                 borderRadius: BorderRadius.circular(5),
                 elevation: 14.0,
-                shadowColor: Colors.grey.withOpacity(0.5),
+                shadowColor: Colors.grey.withOpacity(1),
                 child: Stack(
                   children: <Widget>[
                     AspectRatio(
@@ -199,6 +201,7 @@ class _SliverGrid extends StatelessWidget {
           },
           childCount: posts.length,
         ),
+      ),
     );
   }
 }
