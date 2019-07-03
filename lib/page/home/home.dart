@@ -71,6 +71,8 @@ class _HomeState extends State<HomePage> {
     }*/
   }
 
+  _setting() {}
+
   Widget _buildItem(BannerItem item) {
     return item.itemText;
   }
@@ -83,7 +85,12 @@ class _HomeState extends State<HomePage> {
       child: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            actions: <Widget>[],
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.settings),
+                onPressed: _setting,
+              ),
+            ],
             title: Text("Home"),
 //              backgroundColor: Theme.of(context).primaryColor,
             expandedHeight: 200,
@@ -101,13 +108,13 @@ class _HomeState extends State<HomePage> {
             ),
             pinned: true, //固定导航栏
           ),
-          SliverFixedExtentList(
-            delegate: SliverChildListDelegate(bannerList.map((item) {
-              return _buildItem(item);
-            }).toList()),
-            itemExtent: 120,
-          ),
-          _SliverListDemo(_data)
+//          SliverFixedExtentList(
+//            delegate: SliverChildListDelegate(bannerList.map((item) {
+//              return _buildItem(item);
+//            }).toList()),
+//            itemExtent: 120,
+//          ),
+          _SliverGrid(_data)
         ],
       ),
       onRefresh: () async {
@@ -158,56 +165,40 @@ class _HomePageState extends State<HomePage>
   }
 }
 
-class _SliverListDemo extends StatelessWidget {
+class _SliverGrid extends StatelessWidget {
   var posts = [];
 
-  _SliverListDemo(this.posts);
+  _SliverGrid(this.posts);
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          return Padding(
-            padding: EdgeInsets.only(bottom: 32.0),
-            child: Material(
-                borderRadius: BorderRadius.circular(12.0),
+    return  SliverGrid(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 10.0,
+          crossAxisSpacing: 10.0,
+          childAspectRatio: 1,
+        ),
+        delegate: SliverChildBuilderDelegate(
+          (BuildContext context, int index) {
+            return Material(
+                borderRadius: BorderRadius.circular(5),
                 elevation: 14.0,
-                shadowColor: Colors.green.withOpacity(0.5),
+                shadowColor: Colors.grey.withOpacity(0.5),
                 child: Stack(
                   children: <Widget>[
                     AspectRatio(
-                      aspectRatio: 16 / 9,
+                      aspectRatio: 1,
                       child: Image.network(
                         posts[index],
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Positioned(
-                      top: 32.0,
-                      left: 32.0,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "列表" + index.toString(),
-                            style: TextStyle(
-                                fontSize: 20.0, color: Colors.greenAccent),
-                          ),
-                          Text(
-                            "列表" + index.toString(),
-                            style: TextStyle(
-                                fontSize: 23.0, color: Colors.greenAccent),
-                          ),
-                        ],
-                      ),
-                    )
                   ],
-                )),
-          );
-        },
-        childCount: posts.length,
-      ),
+                ));
+          },
+          childCount: posts.length,
+        ),
     );
   }
 }

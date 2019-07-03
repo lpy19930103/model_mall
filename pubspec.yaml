@@ -29,8 +29,10 @@ dependencies:
   flutter_easyrefresh: ^1.2.7 #下拉刷新
   connectivity: ^0.4.3 #网络连接
   fluwx: ^0.6.2 #微信
-  redux: ^3.0.0
+  redux: ^3.0.0 #状态管理
+  qr_flutter: ^2.0.0 #二维码
   flutter_redux: ^0.5.2  #状态机
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
