@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
       //去除debug角标
       title: 'Mall',
       theme: ThemeData(
-        primaryColor: Color(0xFFF90850),
+        primaryColor: Colors.white,
       ),
       home: WelcomePage(),
       routes: PageConstance.getRoutes(),

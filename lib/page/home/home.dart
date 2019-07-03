@@ -92,7 +92,8 @@ class _HomeState extends State<HomePage> {
               ),
             ],
             title: Text("Home"),
-//              backgroundColor: Theme.of(context).primaryColor,
+            centerTitle: true,
+            backgroundColor: Colors.transparent,
             expandedHeight: 200,
             flexibleSpace: FlexibleSpaceBar(
               background: BannerWidget(
