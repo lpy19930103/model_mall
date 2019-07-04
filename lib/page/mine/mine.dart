@@ -16,7 +16,7 @@ class _MinePageState extends State<MinePage> {
     return Container(
       margin: EdgeInsets.only(top: 30.0),
       child: Column(
-        children: <Widget>[_UserInfoWidget(), _MineWidget()],
+        children: <Widget>[_UserInfoWidget(), _MineWidget(), _MineMenu()],
       ),
     );
   }
@@ -110,7 +110,7 @@ class _MineWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(20),
             child: Column(
               children: <Widget>[
                 Icon(Icons.ac_unit),
@@ -119,7 +119,7 @@ class _MineWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(20),
             child: Column(
               children: <Widget>[
                 Icon(Icons.ac_unit),
@@ -128,7 +128,7 @@ class _MineWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(20),
             child: Column(
               children: <Widget>[
                 Icon(Icons.ac_unit),
@@ -137,11 +137,134 @@ class _MineWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(20),
             child: Column(
               children: <Widget>[
                 Icon(Icons.ac_unit),
                 Text("ICON"),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MineMenu extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+      color: Colors.white,
+      elevation: 1,
+      child: new Column(
+        children: [
+          new Container(
+            color: Colors.white70,
+            height: 45.0,
+            padding: EdgeInsets.only(left: 15.0, right: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.ac_unit),
+                    Text("功能1"),
+                  ],
+                ),
+                Icon(Icons.arrow_forward_ios),
+              ],
+            ),
+          ),
+          new Container(
+            color: Colors.white70,
+            height: 45.0,
+            padding: EdgeInsets.only(left: 15.0, right: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.ac_unit),
+                    Text("功能2"),
+                  ],
+                ),
+                Icon(Icons.arrow_forward_ios),
+              ],
+            ),
+          ),
+          new Container(
+            color: Colors.white70,
+            height: 45.0,
+            padding: EdgeInsets.only(left: 15.0, right: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.ac_unit),
+                    Text("功能3"),
+                  ],
+                ),
+                Icon(Icons.arrow_forward_ios),
+              ],
+            ),
+          ),
+          new Container(
+            color: Colors.white70,
+            height: 45.0,
+            padding: EdgeInsets.only(left: 15.0, right: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.ac_unit),
+                    Text("功能4"),
+                  ],
+                ),
+                Icon(Icons.arrow_forward_ios),
+              ],
+            ),
+          ),
+          new Container(
+            color: Colors.white70,
+            height: 45.0,
+            padding: EdgeInsets.only(left: 15.0, right: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.ac_unit),
+                    Text("功能5"),
+                  ],
+                ),
+                Icon(Icons.arrow_forward_ios),
+              ],
+            ),
+          ),
+          new Container(
+            color: Colors.white70,
+            height: 45.0,
+            padding: EdgeInsets.only(left: 15.0, right: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.ac_unit),
+                    Text("功能6"),
+                  ],
+                ),
+                Icon(Icons.arrow_forward_ios),
               ],
             ),
           ),
